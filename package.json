@@ -1,0 +1,43 @@
+{
+  "name": "express-node-mysql",
+  "dependencies": {
+    "angular-local-storage": "^0.2.2",
+    "async": "*",
+    "body-parser": "*",
+    "concat-files": "*",
+    "connect-mongo": "^0.8.2",
+    "connect-multiparty": "*",
+    "crypto": "*",
+    "debug": "*",
+    "ejs": "*",
+    "express": "*",
+    "express-myconnection": "*",
+    "express-session": "*",
+    "flow": "*",
+    "fs": "*",
+    "gravatar": "*",
+    "lodash": "*",
+    "mocha": "*",
+    "moment": "*",
+    "morgan": "*",
+    "mysql": "*",
+    "nodemailer": "*",
+    "path": "*",
+    "should": "*",
+    "smtp-tester": "*",
+    "supertest": "*",
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "jshint": "^2.8.0"
+  }
+}

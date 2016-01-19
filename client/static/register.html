@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="limsApp">
+  <head>
+    <title>Register</title>
+    <!-- faivcon -->
+    <link rel="icon" type="image/png" href="img/logo-small-ico.png">
+    <!-- style -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Angular Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.2/angular-local-storage.js"></script>
+    <script src="script.js"></script>
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+
+    <style>
+      body {
+        font-family: 'Quicksand';
+      }
+      #center {
+        text-align: center;
+        margin: 0;
+      }
+    </style>
+  </head>
+    <body>
+
+      <div class="container" ng-controller="UserController">
+        <div class="row">
+          <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="signup-wall"> <h3 id="center">Register</h3>
+              <form class="form-signin">
+                <input type="text" ng-model="new_user.first_name" placeholder="First Name" required="required" class="form-control"/>
+                <input type="text" ng-model="new_user.last_name" placeholder="Last Name" required="required" class="form-control"/>
+                <input type="text" ng-model="new_user.company" placeholder="Compnay" required="required" class="form-control"/>
+                <input type="email" ng-model="new_user.email" placeholder="Email" required="required" class="form-control"/>
+                <input type="password" ng-model="new_user.password" placeholder="Password" required="required" class="form-control nomargin"/>
+                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="addUser()">Register</button><span class="clearfix"></span>
+              </form>
+            </div><a href="/" class="text-center new-account">Login</a>
+            <div id="message"></div>
+
+            <form ng-show="registered">
+              <div class="form-group" id="red">
+                  Please check your email and confirm your email address. Thanks.
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+
+    </body>
+</html>

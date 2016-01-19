@@ -1,0 +1,56 @@
+<!-- Plots Partial -->
+<div ng-controller="StorageController"></div>
+
+<div ng-controller="PlottingController" ng-cloak>
+
+	<div class="row" id="beta">
+		<h5> beta testing </h5>
+	</div>
+
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-md-2">
+			<h5>Visualize Data</h5>
+				<a href="#/" class="pull-left"><button class="btn-sm btn-default hvr-icon-back">Go Back</button></a>
+			</div>
+			<div class="col-md-4">
+				<h4> Current Table Analysis </h4>
+				<p style="font-size:12px"> Table: <b>{{ current_category.table_name }}</b></p>
+				<p style="font-size:12px"> Author: <b>{{ current_category.created_by }} </b></p>
+				<p style="font-size:12px"> Created: <b>{{ current_category.created_at }}</b></p>
+				<p style="font-size:12px"> Updated: <b>{{ current_category.updated_at }}</b></p>
+			</div>
+			<!-- Pie Chart -->
+			<div class="col-md-6">
+				<div class="panel panel-default">
+				<!-- Pie Chart  -->
+		            <div class="panel-heading">
+			            <i class="fa fa-pie-chart fa-fw"></i> Formatted PCR Results Pie Chart
+		            </div>
+		             <div class="panel-body">
+						<div id="pie" style="min-width: 110px; height: 200px; max-width: 400px; margin: 0 auto"></div>
+		             </div>
+		        </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container-fluid">
+
+			<!-- Donut Chart -->
+			<div class="col-md-12">
+					<div class="panel panel-default">
+					<!-- Pie Chart  -->
+			            <div class="panel-heading">
+				            <i class="fa fa-pie-chart fa-fw"></i> Formatted PCR Results Donut Chart
+			            </div>
+			             <div class="panel-body">
+							<div id="donut" style="height: 400px"></div>
+			             </div>
+			        </div>
+				</div>
+			</div>
+	</div>
+
+</div>

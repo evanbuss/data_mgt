@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html ng-app="limsApp">
+  <head>
+    <title>Login</title>
+    <!-- faivcon -->
+    <link rel="icon" type="image/png" href="static/img/logo-small-ico.png">
+    <!-- style -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Angular Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.2/angular-local-storage.js"></script>
+    <script src="static/script.js"></script>
+    <script src="static/js/highcharts-ng.js"></script>
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+
+  <style>
+    body {
+      font-family: 'Quicksand';
+    }
+    button:focus {
+      outline:0;
+    }
+    #logo {
+      margin-top: -10px;
+      padding-bottom: 20px;
+      margin-left: 20px;
+    }
+    #lims-font {
+      margin-left: -25px;
+      font-size: 55px;
+      margin-top: 10px;
+    }
+    #bottom {
+      position: absolute;
+      padding: 20px;
+      bottom: 0;
+      right: 0;
+    }
+     /* Icon Wobble Horizontal */
+    @-webkit-keyframes hvr-icon-wobble-horizontal {
+      16.65% {
+        -webkit-transform: translateX(6px);
+        transform: translateX(6px);
+      }
+
+      33.3% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+      }
+
+      49.95% {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+      }
+
+      66.6% {
+        -webkit-transform: translateX(-2px);
+        transform: translateX(-2px);
+      }
+
+      83.25% {
+        -webkit-transform: translateX(1px);
+        transform: translateX(1px);
+      }
+
+      100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes hvr-icon-wobble-horizontal {
+      16.65% {
+        -webkit-transform: translateX(6px);
+        transform: translateX(6px);
+      }
+
+      33.3% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+      }
+
+      49.95% {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+      }
+
+      66.6% {
+        -webkit-transform: translateX(-2px);
+        transform: translateX(-2px);
+      }
+
+      83.25% {
+        -webkit-transform: translateX(1px);
+        transform: translateX(1px);
+      }
+
+      100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+
+    .hvr-icon-wobble-horizontal {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      padding-right: 2.2em;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+    }
+    .hvr-icon-wobble-horizontal:before {
+      content: "\f061";
+      position: absolute;
+      right: 1em;
+      padding: 0 1px;
+      font-family: FontAwesome;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    .hvr-icon-wobble-horizontal:hover:before, .hvr-icon-wobble-horizontal:focus:before, .hvr-icon-wobble-horizontal:active:before {
+      -webkit-animation-name: hvr-icon-wobble-horizontal;
+      animation-name: hvr-icon-wobble-horizontal;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      -webkit-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+    }
+  </style>
+
+  </head>
+    <body>
+
+
+    <div class="container" ng-controller="UserController">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+          <div class="account-wall">
+          <div class="col-sm-6">
+            <img src="static/img/dna-logo.png" alt="Logo" id="logo">
+          </div>
+          <div class="col-sm-6">
+            <h1 id="lims-font">LIMS</h1>
+          </div>
+            <form class="form-signin">
+              <input type="text" ng-model="user_input.email" placeholder="Email" required="required" autofocus="autofocus" class="form-control"/>
+              <input type="password" ng-model="user_input.password" placeholder="Password" required="required" class="form-control"/>
+              <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()">Sign in</button><span class="clearfix"></span>
+            </form>
+          </div><a href="static/register.html" class="text-center new-account">Create an account</a>
+          <div id="message"></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="/static/tables.html" id="bottom"><button class="btn-sm btn-default pull-right hvr-icon-wobble-horizontal">Already Logged In?</button></a>
+
+
+  </body>
+  <!-- JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+</html>
+

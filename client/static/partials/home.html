@@ -1,0 +1,319 @@
+<!-- Home Partial -->
+<div ng-controller="StorageController"></div>
+
+    <!-- Page Up/Down Buttons -->
+    <div class="up-tab">
+        <button onclick="animateToTop(event)" class="btn-xs btn-default hvr-shrink" id="idbydna-color"><span class="glyphicon glyphicon-arrow-up"></span></button>
+    </div>
+    <div class="down-tab">
+        <button onclick="animateToBottom(event)" class="btn-xs btn-default hvr-shrink" id="idbydna-color"><span class="glyphicon glyphicon-arrow-down"></span></button>
+    </div>
+
+    <div class="jumbotron" id="jumbo-style">
+        <div class="container-fluid">
+            <div class="row">
+            <!-- Current Data -->
+                <div class="col-md-3">
+                    <div id="box">
+                        <div class="container">
+                            <h5 style="text-align:center"> Current Data </h5>
+                            <div class="well label-group" style="padding-top:0px">
+                                <div id="down" style="text-align:center">
+                                    <span class="label" style="vertical-align:middle" id="idbydna-color">Table Name</span><br> {{ current_category.table_name }}
+                                </div>
+                                <div id="down">
+                                    <span class="label" style="vertical-align:middle" id="idbydna-color">Author:</span> {{ current_category.created_by }}
+                                </div>
+                                <div id="down">
+                                    <span class="label" style="vertical-align:middle" id="idbydna-color">Created:</span> {{ current_category.created_at }}
+                                </div>
+                                <div id="down">
+                                    <span class="label" style="vertical-align:middle" id="idbydna-color">Updated:</span> {{ current_category.updated_at }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Options -->
+                <div class="col-md-3">
+                    <div id="box">
+                        <div class="container">
+                            <h5 style="text-align:center">Options</h5>
+                            <a href="#/plots"><button class="btn btn-default btn-block hvr-grow-shadow" style="margin-top:20px">Visualize Data</button></a>
+                            <button class="btn btn-default btn-block hvr-shrink" id="show" ng-click="original()" style="margin-top:20px">Show Orginal Data</button>
+                            <button class="btn btn-default btn-block hvr-grow-shadow" id="hide" ng-click="formated()" style="margin-top:20px">Show Formated Data</button>
+                        </div>
+                    </div>
+                </div>
+            <!-- Table -->
+                <div class="col-md-6">
+                    <div id="box">
+                        <div class="container">
+                        <h5 style="text-align:center">Tables</h5>
+                            <div id="table-wrapper">
+                              <div id="table-scroll">
+                                <!-- All Tables Table -->
+                                <table class="table table-striped table-hover" id="view-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Table Name</th>
+                                            <th style="text-align:center">Category</th>
+                                            <th style="text-align:center">Author</th>
+                                            <th style="text-align:right">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in categories" ng-click="changeTable($index)">
+                                            <td> {{ x.table_name }} </td>
+                                            <td style="text-align:center"> {{ x.category_name }}</td>
+                                            <td style="text-align:center"> {{ x.created_by }}</td>
+                                            <td style="text-align:right"> {{ x.created_at }} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- Formated PCR Test Results -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div id="format-pcr-wrapper">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-6 pull-right">
+                        <label class="label pull-right" id="idbydna-color">Query Table</label>
+                        <input type="text" class="form-control" ng-model="filter_name1" placeholder="search...">
+                    </div>
+                    <h3> {{ current_category.table_name }} </h3>
+                    <h5> {{ current_category.created_by }} </h5>
+                    <table class="table table-condensed table-striped table-hover">
+                        <thead>
+                          <tr style="background-color:lightgrey">
+                            <th ng-repeat="column in columns1" > {{ column }} </th>
+                          </tr>
+                        </thead>
+                        <tbody style="background:white">
+                          <tr ng-repeat="x in formatedPcr | filter: filter_name1" ng-if="x.table_id == current_category.table_id">
+                              <td>{{ x.IDbyDNA_id }}</td>
+                              <td>{{ x.Arup_Mnemonic }}</td>
+                              <td>{{ x.test }}</td>
+                              <td>{{ x.result }}</td>
+                              <td>{{ x.source }}</td>
+                              <td>{{ x.source_value }}</td>
+                              <td>{{ x.organism }}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- Original PCR Tests Culture -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div id="original-pcr-wrapper" style="display:none">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-6 pull-right">
+                        <label class="label label-info pull-right" id="idbydna-color"> Query Table </label>
+                        <input type="text" class="form-control" ng-model="filter_name2" placeholder="search...">
+                    </div>
+                    <h3> {{ current_category.table_name }} </h3>
+                    <h5> {{ current_category.created_by }} </h5>
+                    <table class="table table-condensed table-striped table-hover">
+                        <thead>
+                          <tr style="background:lightgrey">
+                             <th ng-repeat="column in columns2"> {{ column }} </th>
+                          </tr>
+                        </thead>
+                        <tbody style="background:white">
+                          <tr ng-repeat="x in originalPcr | filter: filter_name2" ng-if="x.table_id == current_category.table_id">
+                            <td> {{ x.accession }} </td>
+                            <td> {{ x.patient_name }} </td>
+                            <td> {{ x.order_test_mnemonic }} </td>
+                            <td> {{ x.age }} </td>
+                            <td> {{ x.sex }} </td>
+                            <td> {{ x.client_id }} </td>
+                            <td> {{ x.state }} </td>
+                            <td> {{ x.zip_code }} </td>
+                            <td> {{ x.collection_month }} </td>
+                            <td> {{ x.collection_year }} </td>
+                            <td> {{ x.collect_to_complete_hours }} </td>
+                            <td> {{ x.specimen_type_code }} </td>
+                            <td> {{ x.discard_date }} </td>
+                            <td> {{ x.BORD_Source }} </td>
+                            <td> {{ x.BParaPert }} </td>
+                            <td> {{ x.BORD_TM }} </td>
+                            <td> {{ x.BordPert_Source }} </td>
+                            <td> {{ x.BPert }} </td>
+                            <td> {{ x.NC_CT_BORD }} </td>
+                            <td> {{ x.CHLAM_PNEUM_PCR }} </td>
+                            <td> {{ x.CPneumo_Source }} </td>
+                            <td> {{ x.NC_CT_CPNEU }} </td>
+                            <td> {{ x.CWP_Result }} </td>
+                            <td> {{ x.CWP_Source }} </td>
+                            <td> {{ x.NC_CWP }} </td>
+                            <td> {{ x.L_pneumophila }} </td>
+                            <td> {{ x.L_species }} </td>
+                            <td> {{ x.LEGION_Source }} </td>
+                            <td> {{ x.NC_CT_L_pneumo }} </td>
+                            <td> {{ x.NC_CT_L_species }} </td>
+                            <td> {{ x.MPNEUMOPCR }} </td>
+                            <td> {{ x.Myco_Source }} </td>
+                            <td> {{ x.NC_CT_MPNEU }} </td>
+                            <td> {{ x.NC_CT_PARAFLU }} </td>
+                            <td> {{ x.PARAFLU_Source }} </td>
+                            <td> {{ x.PARAFLU1_Result }} </td>
+                            <td> {{ x.PARAFLU2_Result }} </td>
+                            <td> {{ x.PARAFLU3_Result }} </td>
+                            <td> {{ x.PARAFLU4_Result }} </td>
+                            <td> {{ x.NC_CT_PCP }} </td>
+                            <td> {{ x.PCP_Result }} </td>
+                            <td> {{ x.PCP_Source }} </td>
+                            <td> {{ x.PNEUM_SRC }} </td>
+                            <td> {{ x.Pneumst }} </td>
+                            <td> {{ x.PNEUMST_REFLEX }} </td>
+                            <td> {{ x.Flu_A_PCR }} </td>
+                            <td> {{ x.Flu_B_PCR }} </td>
+                            <td> {{ x.NC_CT_RespMini }} </td>
+                            <td> {{ x.RespMini_Source }} </td>
+                            <td> {{ x.RespMini_TM }} </td>
+                            <td> {{ x.RSV_PCR }} </td>
+                            <td> {{ x.Adenov }} </td>
+                            <td> {{ x.Flu_A }} </td>
+                            <td> {{ x.Flu_B }} </td>
+                            <td> {{ x.HMPV }} </td>
+                            <td> {{ x.Pflu_1 }} </td>
+                            <td> {{ x.Pflu_2 }} </td>
+                            <td> {{ x.Pflu_3 }} </td>
+                            <td> {{ x.RS_V }} </td>
+                            <td> {{ x.RSPFA_Source }} </td>
+                            <td> {{ x.T_Media }} </td>
+                            <td> {{ x.Adeno_B_E }} </td>
+                            <td> {{ x.Adeno_C }} </td>
+                            <td> {{ x.HMPV_RESULT }} </td>
+                            <td> {{ x.Inf_A_2009 }} </td>
+                            <td> {{ x.Influenza_A }} </td>
+                            <td> {{ x.Influenza_A_H1 }} </td>
+                            <td> {{ x.Influenza_A_H3 }} </td>
+                            <td> {{ x.Influenza_B }} </td>
+                            <td> {{ x.Parainfluenza_1 }} </td>
+                            <td> {{ x.Parainfluenza_2 }} </td>
+                            <td> {{ x.Parainfluenza_3 }} </td>
+                            <td> {{ x.Rhino }} </td>
+                            <td> {{ x.RSV_A }} </td>
+                            <td> {{ x.RSV_B }} </td>
+                            <td> {{ x.RVP_Source }} </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- Formated Negitive Culture -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div id="formated-neg-wrapper" style="display:none">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-6 pull-right">
+                        <label class="label label-info pull-right" id="idbydna-color"> Query Table </label>
+                        <input type="text" class="form-control" ng-model="filter_name3" placeholder="search...">
+                    </div>
+                    <h3> {{ current_category.table_name }} </h3>
+                    <h5> {{ current_category.created_by }} </h5>
+                        <table class="table table-condensed table-striped table-hover">
+                            <thead>
+                                <tr style="background-color:lightgrey">
+                                    <th ng-repeat="column in columns3"> {{ column }} </th>
+                                </tr>
+                            </thead>
+                            <tbody style="background:white">
+                                <tr ng-repeat="x in formatedNegCulture | filter: filter_name3" ng-if="x.table_id == current_category.table_id">
+                                    <td> {{ x.IDbyDNA_id }} </td>
+                                    <td> {{ x.checked_out }} </td>
+                                    <td> {{ x.test_mnemonic }} </td>
+                                    <td> {{ x.age }} </td>
+                                    <td> {{ x.sex }} </td>
+                                    <td> {{ x.state }} </td>
+                                    <td> {{ x.collection_month }} </td>
+                                    <td> {{ x.collection_year }} </td>
+                                    <td> {{ x.collect_to_complete_hours }} </td>
+                                    <td> {{ x.general_source }} </td>
+                                    <td> {{ x.body_site_source }} </td>
+                                    <td> {{ x.source_chart_name }} </td>
+                                    <td> {{ x.is_culture_positive }} </td>
+                                    <td> {{ x.organism_mnemonic }} </td>
+                                    <td> {{ x.result_long_text }} </td>
+                                    <td> {{ x.test_code }} </td>
+                                    <td> {{ x.test_name }} </td>
+                                    <td> {{ x.organism }} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- Original Negitive Culture -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div id="orginal-neg-wrapper" style="display:none">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-6 pull-right">
+                        <label class="label label-info pull-right" id="idbydna-color"> Query Table </label>
+                        <input type="text" class="form-control" ng-model="filter_name4" placeholder="search...">
+                    </div>
+                    <h3> {{ current_category.table_name }} </h3>
+                    <h5> {{ current_category.created_by }} </h5>
+                    <table class="table table-condensed table-striped table-hover">
+                        <thead>
+                            <tr style="background-color:lightgrey">
+                                <th ng-repeat="column in columns4"> {{ column }} </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background:white">
+                            <tr ng-repeat="x in originalNegCulture | filter: filter_name4" ng-if="x.table_id == current_category.table_id">
+                                <td> {{ x.IDbyDNA_id }} </td>
+                                <td> {{ x.checked_out }} </td>
+                                <td> {{ x.test_mnemonic }} </td>
+                                <td> {{ x.age }} </td>
+                                <td> {{ x.sex }} </td>
+                                <td> {{ x.state }} </td>
+                                <td> {{ x.collection_month }} </td>
+                                <td> {{ x.collection_year }} </td>
+                                <td> {{ x.collect_to_complete_hours }} </td>
+                                <td> {{ x.general_source }} </td>
+                                <td> {{ x.body_site_source }} </td>
+                                <td> {{ x.source_chart_name }} </td>
+                                <td> {{ x.is_culture_positive }} </td>
+                                <td> {{ x.organism_mnemonic }} </td>
+                                <td> {{ x.result_long_text }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div style="margin-bottom:25px;"></div>
